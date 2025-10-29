@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 
+import noteRoutes from './routes/note.route.js'
 
 dotenv.config()
 const app = express()
@@ -14,7 +15,9 @@ try{
     console.log("Error connecting to mongoDB", error)
 }
 
-
+//Routing Middleware
+app.use(express.json())
+app.use("/api/v1/noteapp", noteRoutes)
 
 app.listen(port, () => {
   console.log(`Server is running on  ${port}`)
